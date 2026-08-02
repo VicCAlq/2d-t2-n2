@@ -4,8 +4,10 @@ import { baixarFeedRSS } from './leitorRSS.jsx'
 export default function AdicionarRSS({setFeed}){
     const [textoInserido, setTextoInserido] = useState("")
 
-    function pegarObjetoDoFeed(endereco) {
-        const objetoFeed = baixarFeedRSS(endereco)
+    async function pegarObjetoDoFeed(url) {
+        setTextoInserido("")
+        console.log("baixando feed rss de: " + url)
+        const objetoFeed = await baixarFeedRSS(url)
         console.log(objetoFeed)
         setFeed(objetoFeed)
     }

@@ -4,11 +4,11 @@ class Noticia {
     descricao,
     dataDePublicacao,
     categoria){
-         this.nome=nome,
-    this.endereco=endereco,
-    this.descricao=descricao,
-    this.dataDePublicacao=descricao,
-    this.categoria=categoria
+         this.nome=nome;
+    this.endereco=endereco;
+    this.descricao=descricao;
+    this.dataDePublicacao=dataDePublicacao;
+    this.categoria=categoria;
     }
 }
 
