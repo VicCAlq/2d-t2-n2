@@ -22,3 +22,7 @@ class Noticia {
     }
 
 }
+
+export {
+    Fonte, Noticia
+}
