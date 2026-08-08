@@ -1,7 +1,7 @@
 import AdicionarRSS from "./components/AdicionarRSS";
-import Exemplo from "./components/Exemplo";
-import { useState } from "react";
+import PesquisaPorCategoria from "./components/PesquisaPorCategoria"
 import TabelaDeNoticias from "./components/TabelaDeNoticias";
+import { useState } from "react";
 
 const styles = {
   container: {
@@ -16,18 +16,25 @@ const styles = {
 };
 
 export default function App() {
-  
-  const [feed, setFeed] = useState()
-  const [tabelaExibida, setTabelaExibida] = useState()
 
+  const [feed, setFeed] = useState([]);
+  const [fonte, setFonte] = useState(null);
+  const [noticiasFiltradas, setNoticiasFiltradas] = useState([]);
 
+  function atualizaFeed(novasNoticias) {
+    setFeed(novasNoticias);
+    setNoticiasFiltradas(novasNoticias);
+  }
 
   return (
     <div style={styles.container}>
       <h1>Crie seu aplicativo React aqui</h1>
-      <Exemplo setFeed={setFeed}>Componente de exemplo aqui</Exemplo>
-      <AdicionarRSS setFeed={setFeed}/>
-      <TabelaDeNoticias feed={feed}/>
+      <PesquisaPorCategoria
+        noticias={feed}
+        aoFiltrar={(resultado) => setNoticiasFiltradas(resultado)}
+      />
+      <AdicionarRSS setFeed={atualizaFeed} setFonte={setFonte}/>
+      <TabelaDeNoticias noticias={noticiasFiltradas} fonte={fonte} />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-class FonteNoticias{
+class Fontedenoticias{
     constructor(nome,
     endereco,
     descricao,
@@ -10,4 +10,4 @@ class FonteNoticias{
     }
 }
 
-const fontedenoticia = new FonteNoticias() 
+export default Fontedenoticias;
