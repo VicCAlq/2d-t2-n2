@@ -1,6 +1,7 @@
 import AdicionarRSS from "./components/AdicionarRSS";
 import PesquisaPorCategoria from "./components/PesquisaPorCategoria"
 import TabelaDeNoticias from "./components/TabelaDeNoticias";
+import PesquisaPorFonte from "./components/PesquisaPorFonte"
 import { useState } from "react";
 
 const styles = {
@@ -29,12 +30,21 @@ export default function App() {
   return (
     <div style={styles.container}>
       <h1>Crie seu aplicativo React aqui</h1>
+
       <PesquisaPorCategoria
         noticias={feed}
         aoFiltrar={(resultado) => setNoticiasFiltradas(resultado)}
       />
+
+
+      <PesquisaPorFonte
+      noticias={feed}
+      aoFiltrar={(resultado) => setNoticiasFiltradas(resultado)}/>
+      
       <AdicionarRSS setFeed={atualizaFeed} setFonte={setFonte}/>
+
       <TabelaDeNoticias noticias={noticiasFiltradas} fonte={fonte} />
+      
     </div>
   );
 }
