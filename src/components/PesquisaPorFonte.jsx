@@ -1,34 +1,38 @@
 import { useState } from "react";
+import {   connectarDB,
+  adicionarFonte,
+  listarFontes,
+  removerFonte,
+  adicionarNoticia,
+  listarNoticias,
+  filtrarNoticiasPorFonte,
+  filtrarNoticiasPorCategoria,
+  removerNoticia, } from './database.js';
 
-function PesquisaPorFonte({ noticias, aoFiltrar }) {
+function PesquisaPorFonte({ noticias, aoFiltrar , todasFontes }) {
     const [termo, setTermo] = useState("");
 
-    function handleChange(valor) {
+    /*function pesquisaFonte(valor) {
         setTermo(valor);
 
-        const termoBusca = valor.toLowerCase();
+        const termoBusca =filtrarNoticiasPorFonte(valor) ;
 
         const resultado = noticias.filter((noticia) =>
             noticia.fonte?.toLowerCase().includes(termoBusca)
         );
 
-        aoFiltrar(resultado);
-    }
-
-    return (
-        <input
-            type="text"
-            placeholder="Pesquisar por Fonte..."
-            value={termo}
-            onChange={(e) => handleChange(e.target.value)}
-            style={{
-                padding: "8px",
-                width: "20%",
-                marginBottom: "10px",
-                boxSizing: "border-box",
-            }}
-        />
-    );
+        aoFiltrar(termoBusca);
+    }*/
+  return(<>
+        <select>
+            {todasFontes.map((fonte) => {
+                return <option 
+                    value={fonte.nome}
+                    onSelect={() => filtrarNoticiasPorFonte(fonte.nome)}
+                >{fonte.nome}</option>
+            })}
+        </select>
+    </>)
 }
 
 export default PesquisaPorFonte;

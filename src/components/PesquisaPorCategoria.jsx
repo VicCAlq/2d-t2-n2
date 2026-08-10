@@ -1,34 +1,41 @@
 import { useState } from "react";
-
+ import {  connectarDB,
+  adicionarFonte,
+  listarFontes,
+  removerFonte,
+  adicionarNoticia,
+  listarNoticias,
+  filtrarNoticiasPorFonte,
+  filtrarNoticiasPorCategoria,
+  removerNoticia,
+} from './database.js';
 function PesquisaPorCategoria({ noticias, aoFiltrar }) {
     const [termo, setTermo] = useState("");
 
-    function handleChange(valor) {
+    async function pesquisaCategoria(valor) {
         setTermo(valor);
 
-        const termoBusca = valor.toLowerCase();
+        const termoBusca = /*valor.*/ await filtrarNoticiasPorCategoria(valor);
 
-        const resultado = noticias.filter((noticia) =>
-            noticia.descricao?.toLowerCase().includes(termoBusca)
-        );
 
         aoFiltrar(resultado);
     }
 
+    async function opcoes (){
+        
+        
+
+        aoFiltrar(resultado);
+    }
+
+
     return (
-        <input
-            type="text"
-            placeholder="Pesquisar por descrição..."
-            value={termo}
-            onChange={(e) => handleChange(e.target.value)}
-            style={{
-                padding: "8px",
-                width: "20%",
-                marginBottom: "10px",
-                boxSizing: "border-box",
-            }}
-        />
+        <select name="fonte" >
+           <option value="">aaaaaaaa</option> 
+        </select>
+
     );
+    
 }
 
 export default PesquisaPorCategoria;
