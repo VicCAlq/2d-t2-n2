@@ -11,10 +11,11 @@ class Fonte {
 }
 
 class Noticia {
-    constructor(nome, endereco, descricao, dataDePublicacao, categoria)
+    constructor(nome, fonte, endereco, descricao, dataDePublicacao, categoria)
 
     {
         this.nome = nome
+        this.fonte = fonte
         this.endereco = endereco
         this.descricao = descricao
         this.dataDePublicacao = dataDePublicacao
