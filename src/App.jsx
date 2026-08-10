@@ -13,10 +13,26 @@ const styles = {
 };
 
 export default function App() {
+
+  const [endereco, setEndereco] = useState("");
+
+  async function carregarFeed() {
+    const resultado = await baixarFeedRSS(endereco)
+  }
+  
   return (
+
     <div style={styles.container}>
-      <h1>Crie seu aplicativo React aqui</h1>
-      <Exemplo>Componente de exemplo aqui</Exemplo>
+
+      <input 
+          value={endereco}
+          onChange={(e) => setEndereco(e.target.value)}
+      />
+
+      <button onClick={() => carregarFeed()}>
+        Clique para carregar o feed
+      </button>
+
     </div>
   );
 }
