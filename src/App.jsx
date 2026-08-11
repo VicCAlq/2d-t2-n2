@@ -1,11 +1,16 @@
 import { useState } from "react";
-import { 
-  baixarFeedRSS, 
-  adicionarNoticia, 
-  adicionarFonte, 
-  listarNoticias 
-} from "./components/database"
-import { Fonte, Noticia } from './components/classes'
+
+import {
+  adicionarNoticia,
+  adicionarFonte,
+  listarNoticias
+} from "./components/database";
+
+import { baixarFeedRSS } from "./components/leitorRSS";
+
+import { Fonte, Noticia } from "./components/classes";
+
+import TabelaNoticias from "./components/tabelaNoticias";
 
 const styles = {
   container: {
@@ -22,8 +27,8 @@ const styles = {
 export default function App() {
 
   const [endereco, setEndereco] = useState("");
-  const [filtroFonte, setFiltroFonte] = useState("");
-  const [filtroCategoria, setFiltroCategoria] = useState("");
+  //const [filtroFonte, setFiltroFonte] = useState("");
+  //const [filtroCategoria, setFiltroCategoria] = useState("");
   const [noticiasExibidas, setNoticiasExibidas] = useState([]);
  // mesma coisa pra categoria
  // Mesma coisa pra notícias exibidas
@@ -44,6 +49,7 @@ export default function App() {
       for (let noticia of resultado.noticias) {
         const novaNoticia = new Noticia(
           noticia.titulo,
+          resultado.fonte.titulo,
           noticia.link,
           noticia.descricao,
           noticia.dataPublicacao,
@@ -64,21 +70,20 @@ export default function App() {
 
   
   return (
+      <div style={styles.container}>
 
-    <div style={styles.container}>
+        <input 
+            value={endereco}
+            onChange={(e) => setEndereco(e.target.value)}
+        />
 
-      <input 
-          value={endereco}
-          onChange={(e) => setEndereco(e.target.value)}
-      />
+        <button onClick={() => carregarFeed()}>
+          Clique para carregar o feed
+        </button>
 
-      <button onClick={() => carregarFeed()}>
-        Clique para carregar o feed
-      </button>
+        <TabelaNoticias noticias={noticiasExibidas}/>
 
-      <TabelaNoticias noticias={noticiasExibidas}/>
-
-    </div>
+      </div>
   );
 }
 
