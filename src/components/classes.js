@@ -11,7 +11,7 @@ class Fonte {
 }
 
 class Noticia {
-    constructor(nome, fonte, endereco, descricao, dataDePublicacao, categoria)
+    constructor(nome, fonte, endereco, descricao, dataDePublicacao, categorias)
 
     {
         this.nome = nome
@@ -19,7 +19,7 @@ class Noticia {
         this.endereco = endereco
         this.descricao = descricao
         this.dataDePublicacao = dataDePublicacao
-        this.categoria = categoria
+        this.categorias = categorias
     }
 
 }
