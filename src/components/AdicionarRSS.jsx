@@ -27,12 +27,14 @@ export default function AdicionarRSS({ setFeed , setFonte}) {
               
                 for (let noticia of resposta.noticias) {
                     const novaNoticia = new Noticia(
-                    noticia.titulo,
-                    resposta.fonte.titulo,
-                    noticia.link,
-                    noticia.descricao,
-                )
-                await adicionarNoticia(novaNoticia)
+                        noticia.titulo,
+                        resposta.fonte.titulo,
+                        noticia.link,
+                        noticia.descricao,
+                        noticia.dataPublicacao,
+                        noticia.categorias,
+                    )
+                    await adicionarNoticia(novaNoticia)
                 }
                 const novaFonte = new Fontedenoticias(
                     resposta.fonte.titulo,
@@ -54,6 +56,7 @@ export default function AdicionarRSS({ setFeed , setFonte}) {
                 <input type="text"
                     value={textoInserido}
                     onChange={(e) => setTextoInserido(e.target.value)}
+                    placeholder="Digite a URL do feed RSS"
                 />
             </div>
             <button onClick={() => {

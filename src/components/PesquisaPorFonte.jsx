@@ -1,4 +1,4 @@
-import { useState } from "react";
+/*import { useState } from "react";
 import {   connectarDB,
   adicionarFonte,
   listarFontes,
@@ -12,7 +12,7 @@ import {   connectarDB,
 function PesquisaPorFonte({ noticias, aoFiltrar , todasFontes }) {
     const [termo, setTermo] = useState("");
 
-    /*function pesquisaFonte(valor) {
+    function pesquisaFonte(valor) {
         setTermo(valor);
 
         const termoBusca =filtrarNoticiasPorFonte(valor) ;
@@ -22,7 +22,7 @@ function PesquisaPorFonte({ noticias, aoFiltrar , todasFontes }) {
         );
 
         aoFiltrar(termoBusca);
-    }*/
+    }
   return(<>
         <select>
             {todasFontes.map((fonte) => {
@@ -31,6 +31,34 @@ function PesquisaPorFonte({ noticias, aoFiltrar , todasFontes }) {
                     onSelect={() => filtrarNoticiasPorFonte(fonte.nome)}
                 >{fonte.nome}</option>
             })}
+        </select>
+    </>)
+}
+
+export default PesquisaPorFonte;*/
+import { useState } from "react";
+import { filtrarNoticiasPorFonte } from './database.js';
+
+function PesquisaPorFonte({ noticias, aoFiltrar , todasFontes }) {
+    const [termo, setTermo] = useState("");
+
+    return(<>
+        <select
+          defaultValue=""
+          onChange={async (e) => {
+            const valor = e.target.value;
+            if (!valor) {
+              aoFiltrar(noticias);
+              return;
+            }
+            const resultado = await filtrarNoticiasPorFonte(valor);
+            aoFiltrar(resultado);
+          }}
+        >
+          <option value="" disabled>Selecione uma fonte</option>
+          {todasFontes.map((fonte) => (
+            <option key={fonte.id} value={fonte.nome}>{fonte.nome}</option>
+          ))}
         </select>
     </>)
 }

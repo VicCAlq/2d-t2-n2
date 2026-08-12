@@ -13,15 +13,15 @@ export default function TabelaDeNoticias({ noticias,fonte }) {
             <tbody>
                 {noticias.map((noticia, index) => (
                     <tr key={index} style={{ backgroundColor: "#7ab" }}>
-                        <td>{noticia.titulo}</td>
+                        <td>{noticia.titulo || noticia.nome}</td>
                         <td>{fonte?.titulo || noticia.fonte || 'Sem fonte'}</td>
                         <td>{noticia.descricao}</td>
                         <td>
-                            <a href={noticia.link} target="_blank" rel="noopener noreferrer">
-                                {noticia.link}
+                            <a href={noticia.link || noticia.endereco} target="_blank" rel="noopener noreferrer">
+                                {noticia.link || noticia.endereco || 'Sem link'}
                             </a>
                         </td>
-                        <td>{noticia.dataPublicacao}</td>
+                        <td>{noticia.dataPublicacao || noticia.dataDePublicacao || 'Sem data'}</td>
                     </tr>
                 ))}
             </tbody>
