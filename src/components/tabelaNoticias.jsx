@@ -1,4 +1,4 @@
-function TabelaNoticias() {
+function TabelaNoticias( {noticias} ) {
 
     return(
         <table>
@@ -16,7 +16,7 @@ function TabelaNoticias() {
 
             <tbody>
                 {noticias.map((noticia) => (
-                    <tr>
+                    <tr key={noticia.id}>
                         <td>{noticia.nome}</td>
                         <td>{noticia.fonte}</td>
                         <td>{noticia.categoria}</td>
