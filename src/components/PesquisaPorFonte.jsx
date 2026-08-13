@@ -39,7 +39,7 @@ export default PesquisaPorFonte;*/
 import { useState } from "react";
 import { filtrarNoticiasPorFonte } from './database.js';
 
-function PesquisaPorFonte({ noticias, aoFiltrar , todasFontes }) {
+function PesquisaPorFonte({ noticias, aoFiltrar, todasFontes, setFonte }) {
     const [termo, setTermo] = useState("");
 
     return(<>
@@ -49,9 +49,12 @@ function PesquisaPorFonte({ noticias, aoFiltrar , todasFontes }) {
             const valor = e.target.value;
             if (!valor) {
               aoFiltrar(noticias);
+              setFonte(null);
               return;
             }
             const resultado = await filtrarNoticiasPorFonte(valor);
+            const fonteObjeto = todasFontes.find(fonte => fonte.nome === valor);
+            setFonte(fonteObjeto);
             aoFiltrar(resultado);
           }}
         >

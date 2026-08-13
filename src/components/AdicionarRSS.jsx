@@ -56,7 +56,7 @@ export default function AdicionarRSS({ setFeed , setFonte}) {
                 <input type="text"
                     value={textoInserido}
                     onChange={(e) => setTextoInserido(e.target.value)}
-                    placeholder="Digite a URL do feed RSS"
+                    placeholder="Digite a URL "
                 />
             </div>
             <button onClick={() => {

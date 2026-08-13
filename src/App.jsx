@@ -72,6 +72,7 @@ export default function App() {
       noticias={feed}
       aoFiltrar={(resultado) => setNoticiasFiltradas(resultado)}
       todasFontes={todasFontes}
+      setFonte={setFonte}
       />
       
       <AdicionarRSS setFeed={atualizaFeed} setFonte={setFonte}/>
