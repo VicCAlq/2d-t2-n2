@@ -1,7 +1,7 @@
 function TabelaNoticias( {noticias} ) {
 
     return(
-        <table>
+        <table className="tabela-noticias">
 
             <thead>
                 <tr>
@@ -19,7 +19,7 @@ function TabelaNoticias( {noticias} ) {
                     <tr key={noticia.id}>
                         <td>{noticia.nome}</td>
                         <td>{noticia.fonte}</td>
-                        <td>{noticia.categoria}</td>
+                        <td>{noticia.categorias.join(", ")}</td>
                         <td>{noticia.endereco}</td>
                         <td>{noticia.descricao}</td>
                         <td>{noticia.dataDePublicacao}</td>
