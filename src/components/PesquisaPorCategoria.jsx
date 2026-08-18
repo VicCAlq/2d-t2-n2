@@ -1,5 +1,5 @@
 import { filtrarNoticiasPorCategoria } from './database.js';
-
+/*SLA*/
 function PesquisaPorCategoria({ noticias, aoFiltrar, todasNoticias }) {
 
     const listaCategoriasTratadas = todasNoticias.map((noticia) => {
