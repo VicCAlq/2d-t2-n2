@@ -5,6 +5,7 @@ import TabelaNoticias from "./components/TabelaNoticias";
 import { baixarFeedRSS } from "./services/leitorRSS";
 import Noticia from "./classes/Noticia";
 import FonteDeNoticias from "./classes/FonteDeNoticias";
+import "./App.css";
 
 import {
   adicionarFonte,
@@ -58,6 +59,7 @@ export default function App() {
       const listaNoticias = feed.noticias.map((item) => {
         return new Noticia(
           item.titulo,
+          feed.titulo,
           item.link,
           item.descricao,
           item.dataPublicacao,
@@ -95,13 +97,13 @@ export default function App() {
 
     const fonteOk =
       fonte === "" ||
-      nomesFontes.includes(fonte);
+      noticia.fonte === fonte;
 
     return categoriaOk && fonteOk;
   });
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div className="app">
       <h1>Agregador de Notícias</h1>
 
       <FormFonte aoAdicionar={adicionarNovaFonte} />
