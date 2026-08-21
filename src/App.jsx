@@ -1,18 +1,59 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FormFonte from "./components/FormFonte";
 import Filtros from "./components/Filtros";
 import TabelaNoticias from "./components/TabelaNoticias";
 import { baixarFeedRSS } from "./services/leitorRSS";
 import Noticia from "./classes/Noticia";
+import FonteDeNoticias from "./classes/FonteDeNoticias";
+
+import {
+  adicionarFonte,
+  listarFontes,
+  adicionarNoticia,
+  listarNoticias,
+} from "./services/database";
 
 export default function App() {
   const [noticias, setNoticias] = useState([]);
+  const [fontes, setFontes] = useState([]);
   const [categoria, setCategoria] = useState("");
   const [fonte, setFonte] = useState("");
 
-  async function adicionarFonte(url) {
+  useEffect(() => {
+    async function carregarDados() {
+      try {
+        const noticiasSalvas = await listarNoticias();
+        const fontesSalvas = await listarFontes();
+
+        setNoticias(noticiasSalvas);
+        setFontes(fontesSalvas);
+      } catch (erro) {
+        console.error("Erro ao carregar os dados:", erro);
+      }
+    }
+
+    carregarDados();
+  }, []);
+
+  async function adicionarNovaFonte(url) {
     try {
       const feed = await baixarFeedRSS(url);
+
+      const novaFonte = new FonteDeNoticias(
+        feed.titulo || "Fonte RSS",
+        url,
+        feed.descricao || "",
+        "RSS"
+      );
+
+      const idFonte = await adicionarFonte(novaFonte);
+
+      novaFonte.id = idFonte;
+
+      setFontes((fontesAnteriores) => [
+        ...fontesAnteriores,
+        novaFonte,
+      ]);
 
       const listaNoticias = feed.noticias.map((item) => {
         return new Noticia(
@@ -24,19 +65,38 @@ export default function App() {
         );
       });
 
-      setNoticias(listaNoticias);
+      for (const noticia of listaNoticias) {
+        await adicionarNoticia(noticia);
+      }
+
+      const noticiasAtualizadas = await listarNoticias();
+
+      setNoticias(noticiasAtualizadas);
     } catch (erro) {
-      console.error(erro);
-      alert("Erro ao carregar o feed RSS.");
+      console.error("Erro ao carregar e salvar o feed RSS:", erro);
+      alert("Erro ao carregar e salvar o feed RSS.");
     }
   }
 
-  const categorias = [...new Set(noticias.map((n) => n.categoria))];
-  const fontes = ["RSS"];
+  const categorias = [
+    ...new Set(
+      noticias.map((noticia) => noticia.categoria)
+    ),
+  ];
 
-  const noticiasFiltradas = noticias.filter((n) => {
-    const categoriaOk = categoria === "" || n.categoria === categoria;
-    const fonteOk = fonte === "" || fonte === "RSS";
+  const nomesFontes = fontes.map(
+    (fonte) => fonte.nome
+  );
+
+  const noticiasFiltradas = noticias.filter((noticia) => {
+    const categoriaOk =
+      categoria === "" ||
+      noticia.categoria === categoria;
+
+    const fonteOk =
+      fonte === "" ||
+      nomesFontes.includes(fonte);
+
     return categoriaOk && fonteOk;
   });
 
@@ -44,11 +104,11 @@ export default function App() {
     <div style={{ padding: "20px" }}>
       <h1>Agregador de Notícias</h1>
 
-      <FormFonte aoAdicionar={adicionarFonte} />
+      <FormFonte aoAdicionar={adicionarNovaFonte} />
 
       <Filtros
         categorias={categorias}
-        fontes={fontes}
+        fontes={nomesFontes}
         categoria={categoria}
         fonte={fonte}
         setCategoria={setCategoria}

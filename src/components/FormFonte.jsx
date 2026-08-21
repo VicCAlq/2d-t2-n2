@@ -8,7 +8,7 @@ export default function FormFonte({ aoAdicionar }) {
 
     if (!url.trim()) return;
 
-    aoAdicionar(url);
+    aoAdicionar(url.trim());
     setUrl("");
   }
 
