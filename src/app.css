@@ -1,1 +1,30 @@
-a
+.app {
+  min-height: 100vh;
+  padding: 30px;
+  background-color: #f1f5f9;
+  font-family: Arial, sans-serif;
+}
+
+.app h1 {
+  text-align: center;
+  color: #1e293b;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 30px;
+  font-family: Arial, sans-serif;
+
+  background-image: url("./fundo.jfif");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 300px;
+  margin-right: 10px;
+}
