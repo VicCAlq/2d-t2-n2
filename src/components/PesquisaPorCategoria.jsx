@@ -2,17 +2,9 @@ import { filtrarNoticiasPorCategoria } from './database.js';
 /*SLA*/
 function PesquisaPorCategoria({ noticias, aoFiltrar, todasNoticias }) {
 
-    const listaCategoriasTratadas = todasNoticias.map((noticia) => {
-        if (!noticia.categorias || noticia.categorias.length === 0) {
-            return 'sem categoria';
-        }
-        
-        return Array.isArray(noticia.categorias) 
-            ? noticia.categorias.join(', ') 
-            : noticia.categorias;
-    });
-
-    const categoriasUnicas = [...new Set(listaCategoriasTratadas)];
+    let categorias = noticias.map(noticia => noticia.categorias)
+    categorias = categorias.flat()
+    let categoriasUnicas = [ ... new Set(categorias) ]
 
     return (
         <>
