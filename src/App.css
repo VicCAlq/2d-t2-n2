@@ -118,6 +118,21 @@
   background: var(--newsprint);
 }
 
+.form-fonte__label-inline {
+  display: flex !important;
+  align-items: center;
+  margin: 0 !important;
+  white-space: nowrap;
+}
+
+.form-fonte select {
+  padding: 0.65rem 0.85rem;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  background: var(--newsprint);
+  font-family: inherit;
+}
+
 .form-fonte button {
   font-family: var(--font-display);
   letter-spacing: 0.04em;
@@ -293,6 +308,26 @@
   font-size: 0.75rem;
   color: var(--ink-soft);
   text-align: center;
+}
+
+.botao-excluir-fontes {
+  margin-top: 0.75rem;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--fire-red);
+  background: transparent;
+  border: 1px solid var(--fire-red);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.botao-excluir-fontes:hover {
+  background: var(--fire-red);
+  color: var(--newsprint);
 }
 
 /* ---------- RESPONSIVO ---------- */

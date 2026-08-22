@@ -10,7 +10,10 @@ export class Noticia {
     this.fonteNome = fonteNome
   }
   dataFormatada() {
-    const d = new Date(this.dataDePublicacao)
-    return d.toLocaleDateString('pt-BR')
+    return formatarDataDePublicacao(this.dataDePublicacao)
   }
+}
+export function formatarDataDePublicacao(dataDePublicacao) {
+  const d = new Date(dataDePublicacao)
+  return d.toLocaleDateString('pt-BR')
 }
