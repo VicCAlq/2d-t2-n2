@@ -5,9 +5,12 @@ export default function TabelaNoticias({ noticias, fontes }) {
   const [filtroFonte, setFiltroFonte] = useState("todas");
 
   const categorias = [];
+  const categoriasMinusculas = [];
   for (let i = 0; i < noticias.length; i++) {
-    if (noticias[i].categoria && !categorias.includes(noticias[i].categoria)) {
-      categorias.push(noticias[i].categoria);
+    const cat = noticias[i].categoria;
+    if (cat && !categoriasMinusculas.includes(cat.toLowerCase())) {
+      categorias.push(cat);
+      categoriasMinusculas.push(cat.toLowerCase());
     }
   }
 
@@ -19,7 +22,9 @@ export default function TabelaNoticias({ noticias, fontes }) {
   }
 
   const noticiasFiltradas = noticias.filter((noticia) => {
-    const passaCategoria = filtroCategoria === "todas" || noticia.categoria === filtroCategoria;
+    const passaCategoria =
+      filtroCategoria === "todas" ||
+      (noticia.categoria && noticia.categoria.toLowerCase() === filtroCategoria.toLowerCase());
     const passaFonte = filtroFonte === "todas" || noticia.fonteNome === filtroFonte;
     return passaCategoria && passaFonte;
   });
