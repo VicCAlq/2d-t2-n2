@@ -1,30 +1,83 @@
 .app {
   min-height: 100vh;
-  padding: 30px;
-  background-color: #f1f5f9;
+  padding: 40px;
   font-family: Arial, sans-serif;
+ background-image: url("./fundo.jpg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #1e293b;
 }
 
 .app h1 {
   text-align: center;
-  color: #1e293b;
+  color: white;
+  font-size: 42px;
+  margin: 20px 0 30px;
+  text-shadow: 3px 3px 8px #000;
 }
 
-.app {
-  min-height: 100vh;
-  padding: 30px;
-  font-family: Arial, sans-serif;
 
-  background-image: url("./fundo.jfif");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+.app input,
+.app select,
+.app button {
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: none;
+  font-size: 15px;
+  margin: 5px;
 }
+
 
 .input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 300px;
-  margin-right: 10px;
+  width: 350px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+.app button {
+  background: #2563eb;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.app button:hover {
+  background: #1d4ed8;
+  transform: scale(1.05);
+}
+
+
+.app select {
+  background: white;
+  cursor: pointer;
+}
+
+
+.app table {
+  width: 100%;
+  margin-top: 35px;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+.app th {
+  background: #1e293b;
+  color: white;
+  padding: 14px;
+  text-align: left;
+}
+
+.app td {
+  padding: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.app tr:hover {
+  background: #dbeafe;
 }
