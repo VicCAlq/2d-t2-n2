@@ -1,5 +1,5 @@
 import { useState } from "react";
-import FormularioFontes from "./components/FormularioFontes";
+import FormularioFonte from "./components/FormularioFonte";
 
 const styles = {
   container: {
@@ -25,7 +25,7 @@ export default function App() {
     <div style={styles.container}>
       <h1 style={styles.title}>Agregador de Notícias</h1>
 
-      <FormularioFontes onAdicionarFonte={handleAdicionarFonte} />
+      <FormularioFonte onAdicionarFonte={handleAdicionarFonte} />
 
       <h2>Fontes cadastradas ({fontes.length})</h2>
       <ul>
