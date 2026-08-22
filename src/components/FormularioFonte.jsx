@@ -1,11 +1,14 @@
 import { useState } from 'react'
-import { FonteDeNoticias } from '../models/FonteDeNoticias'
+
+const CATEGORIAS_DISPONIVEIS = ['Geral', 'Revista', 'TV', 'Zine', 'Blog', 'Jornal', 'Podcast']
 
 export default function FormularioFonte({ aoAdicionarFonte }) {
   const [link, setLink] = useState('')
+  const [categoria, setCategoria] = useState(CATEGORIAS_DISPONIVEIS[0])
   const [erro, setErro] = useState('')
+  const [carregando, setCarregando] = useState(false)
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     const valor = link.trim()
 
@@ -14,10 +17,18 @@ export default function FormularioFonte({ aoAdicionarFonte }) {
       return
     }
 
-    const novaFonte = FonteDeNoticias.criarAPartirDeLink(valor)
-    aoAdicionarFonte(novaFonte)
-    setLink('')
     setErro('')
+    setCarregando(true)
+    try {
+      // aoAdicionarFonte é async: busca o feed RSS (fetch) e salva fonte + notícias no IndexedDB
+      await aoAdicionarFonte(valor, categoria)
+      setLink('')
+      setCategoria(CATEGORIAS_DISPONIVEIS[0])
+    } catch (err) {
+      setErro(err.message || 'Não foi possível carregar essa fonte. Confere o link e tenta de novo.')
+    } finally {
+      setCarregando(false)
+    }
   }
 
   return (
@@ -35,12 +46,31 @@ export default function FormularioFonte({ aoAdicionarFonte }) {
             placeholder="ex: BornerNews.com"
             value={link}
             onChange={(e) => setLink(e.target.value)}
+            disabled={carregando}
           />
-          <button type="submit">Adicionar</button>
+
+          <label htmlFor="categoria-fonte" className="form-fonte__label-inline">
+            Categoria
+          </label>
+          <select
+            id="categoria-fonte"
+            value={categoria}
+            onChange={(e) => setCategoria(e.target.value)}
+            disabled={carregando}
+          >
+            {CATEGORIAS_DISPONIVEIS.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+
+          <button type="submit" disabled={carregando}>
+            {carregando ? 'Carregando...' : 'Adicionar'}
+          </button>
         </div>
         {erro && <p className="form-fonte__erro">{erro}</p>}
       </form>
     </section>
   )
 }
-

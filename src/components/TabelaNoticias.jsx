@@ -1,3 +1,5 @@
+import { formatarDataDePublicacao } from '../models/Noticia'
+
 export default function TabelaNoticias({ noticias }) {
   if (noticias.length === 0) {
     return (
@@ -40,7 +42,7 @@ export default function TabelaNoticias({ noticias }) {
                 <span className="selo-categoria">{noticia.categoria}</span>
               </td>
               <td className="celula-fonte">{noticia.fonteNome}</td>
-              <td className="celula-data">{noticia.dataFormatada()}</td>
+              <td className="celula-data">{formatarDataDePublicacao(noticia.dataDePublicacao)}</td>
             </tr>
           ))}
         </tbody>
