@@ -17,7 +17,8 @@ async function fetchComProxy(endereco) {
       throw new Error(`HTTP ${resposta.status}`);
     }
 
-    const texto = await resposta.text();
+    const buffer = await resposta.arrayBuffer();
+    const texto = new TextDecoder('utf-8').decode(buffer);
     return texto;
 
   } catch (err) {
