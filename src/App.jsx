@@ -2,17 +2,6 @@ import { useState } from "react";
 import FormularioFonte from "./components/FormularioFonte";
 import TabelaNoticias from "./components/TabelaNoticias";
 
-const styles = {
-  container: {
-    flex: 1,
-    backgroundColor: "#eec",
-    padding: "20px",
-  },
-  title: {
-    color: "#101015"
-  }
-};
-
 export default function App() {
   const [fontes, setFontes] = useState([]);
   const [noticias, setNoticias] = useState([]);
@@ -23,22 +12,46 @@ export default function App() {
   }
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>Agregador de Notícias</h1>
+    <div className="app-shell">
+      <div className="masthead">
+        <span className="masthead-eyebrow">Edição Digital · Tempo Real</span>
+        <h1 className="masthead-title">Agregador de Notícias</h1>
+        <hr className="rule" />
+        <hr className="rule rule--thin" />
+      </div>
 
-      <FormularioFonte onAdicionarFonte={handleAdicionarFonte} />
+      <div className="container">
+        <div className="dispatch-panel">
+          <span className="dispatch-label">Cadastrar nova fonte</span>
+          <FormularioFonte onAdicionarFonte={handleAdicionarFonte} />
+        </div>
 
-      <h2>Fontes cadastradas ({fontes.length})</h2>
-      <ul>
-        {fontes.map((fonte, i) => (
-          <li key={i}>
-            <strong>{fonte.nome}</strong> — {fonte.categoria} ({fonte.endereco})
-          </li>
-        ))}
-      </ul>
+        <div className="stat-bar">
+          <div className="stat-block">
+            <span className="stat-value">{fontes.length}</span>
+            <span className="stat-label">Fontes</span>
+          </div>
+          <div className="stat-block">
+            <span className="live-dot"></span>
+            <span className="stat-value">{noticias.length}</span>
+            <span className="stat-label">Notícias</span>
+          </div>
+        </div>
 
-      <h2>Notícias ({noticias.length})</h2>
-      <TabelaNoticias noticias={noticias} fontes={fontes} />
+        <h2 className="section-heading">Fontes cadastradas</h2>
+        <ul className="source-list">
+          {fontes.map((fonte, i) => (
+            <li className="source-item" key={i}>
+              <span className="source-name">{fonte.nome}</span>
+              <span className="stamp">{fonte.categoria}</span>
+              <span className="source-url">{fonte.endereco}</span>
+            </li>
+          ))}
+        </ul>
+
+        <h2 className="section-heading">Notícias</h2>
+        <TabelaNoticias noticias={noticias} fontes={fontes} />
+      </div>
     </div>
   );
 }
