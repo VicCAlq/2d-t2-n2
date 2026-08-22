@@ -48,8 +48,8 @@ export default function FormularioFonte({ onAdicionarFonte }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="endereco">Link da fonte (RSS/Atom):</label>
+      <div className="field">
+        <label htmlFor="endereco">Link da fonte (RSS/Atom)</label>
         <input
           id="endereco"
           type="text"
@@ -60,8 +60,8 @@ export default function FormularioFonte({ onAdicionarFonte }) {
         />
       </div>
 
-      <div>
-        <label htmlFor="categoria">Categoria:</label>
+      <div className="field">
+        <label htmlFor="categoria">Categoria</label>
         <input
           id="categoria"
           type="text"
@@ -72,11 +72,11 @@ export default function FormularioFonte({ onAdicionarFonte }) {
         />
       </div>
 
-      <button type="submit" disabled={carregando}>
+      <button className="btn" type="submit" disabled={carregando}>
         {carregando ? 'Carregando...' : 'Adicionar fonte'}
       </button>
 
-      {erro && <p style={{ color: 'red' }}>{erro}</p>}
+      {erro && <p className="error-text">{erro}</p>}
     </form>
   );
 }

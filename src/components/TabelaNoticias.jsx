@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { corDaCategoria } from "../cores";
 
 export default function TabelaNoticias({ noticias, fontes }) {
   const [filtroCategoria, setFiltroCategoria] = useState("todas");
@@ -31,9 +32,9 @@ export default function TabelaNoticias({ noticias, fontes }) {
 
   return (
     <div>
-      <div style={{ display: "flex", gap: "16px", marginBottom: "12px" }}>
-        <div>
-          <label htmlFor="filtro-categoria">Categoria: </label>
+      <div className="filter-bar">
+        <div className="filter-field">
+          <label htmlFor="filtro-categoria">Categoria</label>
           <select
             id="filtro-categoria"
             value={filtroCategoria}
@@ -48,8 +49,8 @@ export default function TabelaNoticias({ noticias, fontes }) {
           </select>
         </div>
 
-        <div>
-          <label htmlFor="filtro-fonte">Fonte: </label>
+        <div className="filter-field">
+          <label htmlFor="filtro-fonte">Fonte</label>
           <select
             id="filtro-fonte"
             value={filtroFonte}
@@ -65,35 +66,44 @@ export default function TabelaNoticias({ noticias, fontes }) {
         </div>
       </div>
 
-      <table border="1" cellPadding="8" style={{ borderCollapse: "collapse", width: "100%" }}>
+      <table className="wire-table">
         <thead>
           <tr>
             <th>Nome</th>
             <th>Categoria</th>
-            <th>Data de Publicação</th>
+            <th>Data</th>
             <th>Link</th>
           </tr>
         </thead>
         <tbody>
           {noticiasFiltradas.length === 0 ? (
             <tr>
-              <td colSpan="4" style={{ textAlign: "center" }}>
+              <td className="empty-row" colSpan="4">
                 Nenhuma notícia encontrada.
               </td>
             </tr>
           ) : (
-            noticiasFiltradas.map((noticia, i) => (
-              <tr key={i}>
-                <td>{noticia.nome}</td>
-                <td>{noticia.categoria}</td>
-                <td>{new Date(noticia.dataDePublicacao).toLocaleString("pt-BR")}</td>
-                <td>
-                  <a href={noticia.endereco} target="_blank" rel="noopener noreferrer">
-                    Acessar
-                  </a>
-                </td>
-              </tr>
-            ))
+            noticiasFiltradas.map((noticia, i) => {
+              const cor = corDaCategoria(noticia.categoria);
+              return (
+                <tr key={i}>
+                  <td>{noticia.nome}</td>
+                  <td>
+                    <span className="pill" style={{ background: cor.bg, color: cor.texto }}>
+                      {noticia.categoria}
+                    </span>
+                  </td>
+                  <td className="mono">
+                    {new Date(noticia.dataDePublicacao).toLocaleString("pt-BR")}
+                  </td>
+                  <td>
+                    <a href={noticia.endereco} target="_blank" rel="noopener noreferrer">
+                      Acessar
+                    </a>
+                  </td>
+                </tr>
+              );
+            })
           )}
         </tbody>
       </table>
