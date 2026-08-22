@@ -1,5 +1,6 @@
 import { useState } from "react";
 import FormularioFonte from "./components/FormularioFonte";
+import TabelaNoticias from "./components/TabelaNoticias";
 
 const styles = {
   container: {
@@ -37,14 +38,7 @@ export default function App() {
       </ul>
 
       <h2>Notícias ({noticias.length})</h2>
-      {/* Provisório: no passo 3 isso vira uma tabela com filtros */}
-      <ul>
-        {noticias.map((noticia, i) => (
-          <li key={i}>
-            <strong>{noticia.nome}</strong> — {noticia.categoria} — {noticia.dataDePublicacao}
-          </li>
-        ))}
-      </ul>
+      <TabelaNoticias noticias={noticias} fontes={fontes} />
     </div>
   );
 }

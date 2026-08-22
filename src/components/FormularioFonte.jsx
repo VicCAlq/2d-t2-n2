@@ -20,10 +20,8 @@ export default function FormularioFonte({ onAdicionarFonte }) {
     setCarregando(true);
 
     try {
-      // Busca e interpreta o feed RSS/Atom a partir do link informado
       const feed = await baixarFeedRSS(endereco, categoria);
 
-      // Cria a fonte de notícias com os dados do formulário + info do feed
       const novaFonte = new FonteDeNoticia(
         feed.titulo,
         endereco,
@@ -31,17 +29,20 @@ export default function FormularioFonte({ onAdicionarFonte }) {
         categoria || 'Sem categoria'
       );
 
-      // Repassa a fonte criada e as notícias já parseadas para o componente pai
-      onAdicionarFonte(novaFonte, feed.noticias);
+      const noticiasComFonte = feed.noticias.map((noticia) => {
+        noticia.fonteNome = novaFonte.nome;
+        return noticia;
+      });
 
-      // Limpa o formulário
+      onAdicionarFonte(novaFonte, noticiasComFonte);
+
       setEndereco('');
       setCategoria('');
     } catch (err) {
       setErro('Não foi possível carregar essa fonte. Verifique o link e tente novamente.');
       console.error(err);
     } finally {
-      setCarregando(false)
+      setCarregando(false);
     }
   }
 

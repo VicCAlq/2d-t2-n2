@@ -89,7 +89,6 @@ function lerRSS(textoXML, categoriaFonte) {
     });
   }
 
-  // Converte cada item bruto em uma instância de Noticia
   const noticias = itensBrutos.slice(0, 50).map(item => new Noticia(
     item.titulo,
     item.link,
