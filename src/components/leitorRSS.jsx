@@ -2,6 +2,14 @@ import { Noticia } from '../models/Noticia';
 
 const PROXY = 'https://corsproxy.io/?url=';
 
+function decodificarTexto(buffer) {
+  let texto = new TextDecoder('utf-8').decode(buffer);
+  if (texto.includes('\uFFFD')) {
+    texto = new TextDecoder('iso-8859-1').decode(buffer);
+  }
+  return texto;
+}
+
 async function fetchComProxy(endereco) {
   let erroMaisRecente = null;
 
@@ -18,7 +26,7 @@ async function fetchComProxy(endereco) {
     }
 
     const buffer = await resposta.arrayBuffer();
-    const texto = new TextDecoder('utf-8').decode(buffer);
+    const texto = decodificarTexto(buffer);
     return texto;
 
   } catch (err) {

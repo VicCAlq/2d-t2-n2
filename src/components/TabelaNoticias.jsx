@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { corDaCategoria } from "../cores";
+import { formatarData } from "../formatarData";
 
 export default function TabelaNoticias({ noticias, fontes }) {
   const [filtroCategoria, setFiltroCategoria] = useState("todas");
@@ -94,7 +95,7 @@ export default function TabelaNoticias({ noticias, fontes }) {
                     </span>
                   </td>
                   <td className="mono">
-                    {new Date(noticia.dataDePublicacao).toLocaleString("pt-BR")}
+                    {formatarData(noticia.dataDePublicacao)}
                   </td>
                   <td>
                     <a href={noticia.endereco} target="_blank" rel="noopener noreferrer">
