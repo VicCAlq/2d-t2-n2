@@ -1,0 +1,258 @@
+.pagina {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ---------- CABEÇALHO ---------- */
+
+.masthead {
+  text-align: center;
+  border-bottom: 2px solid black;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.masthead__titulo {
+  font-size: 2.5rem;
+  color: black;
+  margin-bottom: 5px;
+}
+
+.masthead__subtitulo {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0;
+}
+
+/* ---------- SELOS ---------- */
+
+.selo-manual {
+  display: inline-block;
+  font-size: 0.85rem;
+  border: 1px solid black;
+  padding: 2px 6px;
+}
+
+.selo-manual--vermelho {
+  color: white;
+  background: #cc0000;
+  border-color: #cc0000;
+}
+
+/* ---------- FORMULÁRIO ---------- */
+
+.painel-classificados {
+  background: #f2f2f2;
+  border: 1px solid #999;
+  padding: 15px;
+  margin: 20px 0;
+}
+
+.painel-classificados__cabecalho {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.painel-classificados__cabecalho h2 {
+  font-size: 1.2rem;
+}
+
+.form-fonte label {
+  display: block;
+  font-size: 0.8rem;
+  margin-bottom: 4px;
+}
+
+.form-fonte__linha {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.form-fonte input {
+  flex: 1;
+  padding: 6px;
+  border: 1px solid #999;
+}
+
+.form-fonte__label-inline {
+  display: flex !important;
+  align-items: center;
+  margin: 0 !important;
+}
+
+.form-fonte select {
+  padding: 6px;
+  border: 1px solid #999;
+}
+
+.form-fonte button {
+  padding: 6px 12px;
+  background: #dddddd;
+  color: black;
+  border: 1px solid #999;
+  cursor: pointer;
+}
+
+.form-fonte button:hover {
+  background: #cccccc;
+}
+
+.form-fonte__erro {
+  font-size: 0.85rem;
+  color: #cc0000;
+  margin: 8px 0 0;
+}
+
+/* ---------- SEÇÃO DE NOTÍCIAS ---------- */
+
+.secao-noticias__cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  border-bottom: 1px solid black;
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+}
+
+.secao-noticias__cabecalho h2 {
+  font-size: 1.4rem;
+}
+
+/* ---------- FILTROS ---------- */
+
+.barra-filtros {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.seletor {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.seletor label {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.seletor select {
+  padding: 6px;
+  border: 1px solid #999;
+  min-width: 180px;
+}
+
+/* ---------- TABELA ---------- */
+
+.tabela-wrapper {
+  overflow-x: auto;
+}
+
+.tabela-noticias {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabela-noticias thead th {
+  text-align: left;
+  font-size: 0.85rem;
+  padding: 8px;
+  border: 1px solid #999;
+  background: #eeeeee;
+}
+
+.tabela-noticias tbody tr:nth-child(even) {
+  background: #f7f7f7;
+}
+
+.tabela-noticias td {
+  padding: 8px;
+  vertical-align: top;
+  border: 1px solid #ccc;
+}
+
+.manchete-link {
+  font-weight: bold;
+  text-decoration: underline;
+  color: blue;
+}
+
+.manchete-link:hover {
+  color: purple;
+}
+
+.manchete-descricao {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.selo-categoria {
+  display: inline-block;
+  font-size: 0.8rem;
+  border: 1px solid #555;
+  padding: 2px 6px;
+}
+
+.celula-fonte {
+  font-size: 0.85rem;
+}
+
+.celula-data {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.tabela-vazia {
+  border-top: 1px solid #999;
+  padding: 30px 0;
+  text-align: center;
+  color: #555;
+}
+
+/* ---------- RODAPÉ ---------- */
+
+.rodape {
+  margin-top: 30px;
+  padding-top: 10px;
+  border-top: 1px solid #999;
+  font-size: 0.8rem;
+  color: #555;
+  text-align: center;
+}
+
+.botao-excluir-fontes {
+  margin-top: 10px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  color: #cc0000;
+  background: white;
+  border: 1px solid #cc0000;
+  cursor: pointer;
+}
+
+.botao-excluir-fontes:hover {
+  background: #cc0000;
+  color: white;
+}
+
+/* ---------- RESPONSIVO ---------- */
+
+@media (max-width: 600px) {
+  .barra-filtros {
+    flex-direction: column;
+  }
+
+  .seletor select {
+    min-width: 0;
+    width: 100%;
+  }
+}
