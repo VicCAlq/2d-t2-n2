@@ -1,3 +1,4 @@
+
 export class Noticia {
   constructor(nome, endereco, descricao, dataDePublicacao, categoria, fonteNome) {
     this.id = crypto.randomUUID()
